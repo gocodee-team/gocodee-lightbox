@@ -1,4 +1,6 @@
-import { Injectable, Component, NgModule, defineInjectable } from '@angular/core';
+import { lightGallery } from 'lightgallery';
+import { Injectable, Component, Input, ViewChild, NgModule, defineInjectable } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 /**
  * @fileoverview added by tsickle
@@ -21,25 +23,29 @@ GocodeeLightboxService.ctorParameters = () => [];
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class GocodeeLightboxComponent {
-    constructor() { }
+    constructor() {
+    }
     /**
      * @return {?}
      */
     ngOnInit() {
+        console.log(this.images);
+        lightGallery(this.lightbox.nativeElement);
     }
 }
 GocodeeLightboxComponent.decorators = [
     { type: Component, args: [{
-                selector: 'lib-gocodee-lightbox',
-                template: `
-    <p>
-      gocodee-lightbox works!
-    </p>
-  `
+                selector: 'gocodee-lightbox',
+                template: "<div #lightgal>\n    <div *ngFor=\"let image of images\">\n        <a [href]=\"image.image\">\n            <img [src]=\"image.thumbnail\" />\n        </a>\n    </div>\n\n</div>",
+                styles: [""]
             }] }
 ];
 /** @nocollapse */
 GocodeeLightboxComponent.ctorParameters = () => [];
+GocodeeLightboxComponent.propDecorators = {
+    lightbox: [{ type: ViewChild, args: ['lightbox',] }],
+    images: [{ type: Input, args: ['images',] }]
+};
 
 /**
  * @fileoverview added by tsickle
@@ -50,8 +56,11 @@ class GocodeeLightboxModule {
 GocodeeLightboxModule.decorators = [
     { type: NgModule, args: [{
                 declarations: [GocodeeLightboxComponent],
-                imports: [],
-                exports: [GocodeeLightboxComponent]
+                imports: [
+                    CommonModule
+                ],
+                exports: [GocodeeLightboxComponent],
+                providers: [GocodeeLightboxService]
             },] }
 ];
 

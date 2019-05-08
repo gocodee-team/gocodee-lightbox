@@ -7,4 +7,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'lightbox-allinone';
+  images =
+    [
+      {
+        image: "assets/1.jpg",
+        thumbnail: "assets/1.jpg"
+      },
+      {
+        image: "assets/1.jpg",
+        thumbnail: "assets/1.jpg"
+      },
+    ];
+
 }

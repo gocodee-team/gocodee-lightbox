@@ -1,19 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import * as lightgallery from 'lightgallery';
 
 @Component({
-  selector: 'lib-gocodee-lightbox',
-  template: `
-    <p>
-      gocodee-lightbox works!
-    </p>
-  `,
-  styles: []
+  selector: 'gocodee-lightbox',
+  templateUrl: './gocodee-lightbox.component.html',
+  styleUrls: ['./gocodee-lightbox.component.scss']
 })
 export class GocodeeLightboxComponent implements OnInit {
-
-  constructor() { }
-
+  @ViewChild('lightbox') lightbox: ElementRef;
+  @Input('images') images: any;
+  constructor() {
+  }
   ngOnInit() {
+    console.log(this.images);
+    
+    lightgallery.lightGallery(this.lightbox.nativeElement);
   }
 
 }

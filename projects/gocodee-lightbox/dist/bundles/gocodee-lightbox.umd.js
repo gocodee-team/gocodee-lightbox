@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core')) :
-    typeof define === 'function' && define.amd ? define('gocodee-lightbox', ['exports', '@angular/core'], factory) :
-    (factory((global['gocodee-lightbox'] = {}),global.ng.core));
-}(this, (function (exports,i0) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('lightgallery'), require('@angular/core'), require('@angular/common')) :
+    typeof define === 'function' && define.amd ? define('gocodee-lightbox', ['exports', 'lightgallery', '@angular/core', '@angular/common'], factory) :
+    (factory((global['gocodee-lightbox'] = {}),global.lightgallery,global.ng.core,global.ng.common));
+}(this, (function (exports,lightgallery,i0,common) { 'use strict';
 
     /**
      * @fileoverview added by tsickle
@@ -36,15 +36,22 @@
          * @return {?}
          */
             function () {
+                console.log(this.images);
+                lightgallery.lightGallery(this.lightbox.nativeElement);
             };
         GocodeeLightboxComponent.decorators = [
             { type: i0.Component, args: [{
-                        selector: 'lib-gocodee-lightbox',
-                        template: "\n    <p>\n      gocodee-lightbox works!\n    </p>\n  "
+                        selector: 'gocodee-lightbox',
+                        template: "<div #lightgal>\n    <div *ngFor=\"let image of images\">\n        <a [href]=\"image.image\">\n            <img [src]=\"image.thumbnail\" />\n        </a>\n    </div>\n\n</div>",
+                        styles: [""]
                     }] }
         ];
         /** @nocollapse */
         GocodeeLightboxComponent.ctorParameters = function () { return []; };
+        GocodeeLightboxComponent.propDecorators = {
+            lightbox: [{ type: i0.ViewChild, args: ['lightbox',] }],
+            images: [{ type: i0.Input, args: ['images',] }]
+        };
         return GocodeeLightboxComponent;
     }());
 
@@ -58,8 +65,11 @@
         GocodeeLightboxModule.decorators = [
             { type: i0.NgModule, args: [{
                         declarations: [GocodeeLightboxComponent],
-                        imports: [],
-                        exports: [GocodeeLightboxComponent]
+                        imports: [
+                            common.CommonModule
+                        ],
+                        exports: [GocodeeLightboxComponent],
+                        providers: [GocodeeLightboxService]
                     },] }
         ];
         return GocodeeLightboxModule;
